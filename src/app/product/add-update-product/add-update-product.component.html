@@ -1,0 +1,111 @@
+<div class="container">
+    <form class="form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <label class="title">{{ isEditable ? 'Edit' : 'Add new' }} Product </label>
+        </div>
+        <div class="form-body">
+            <div class="row">
+                <label class="col">Name</label>
+                <div class="sub-row">
+                    <input type="text" class="custom-input" formControlName="name">
+                    <div class="error"
+                        *ngIf="productFormControls['name']?.touched && productFormControls['name']?.invalid">
+                        <span *ngIf="productFormControls['name']?.errors['required']">
+                            Name is required.
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col">Price</label>
+                <div class="sub-row">
+                    <input type="number" class="custom-input" formControlName="price">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                    <div class="error"
+                        *ngIf="productFormControls['price']?.touched && productFormControls['price']?.invalid">
+                        <span *ngIf="productFormControls['price']?.errors['required']">
+                            Price is required.
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col">Description</label>
+                <textarea type="text" class="custom-input" formControlName="description"></textarea>
+                <div class="error"
+                    *ngIf="productFormControls['description']?.touched && productFormControls['description']?.invalid">
+                    <span *ngIf="productFormControls['description']?.errors['required']">
+                        Description is required.
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col">For</label>
+                <select class="custom-select" formControlName="gender">
+                    <option value="" hidden selected>Select for</option>
+                    <option style="font-size: 14px;" *ngFor="let f of forTypes" [value]="f.value">{{ f.name }}</option>
+                </select>
+                <div class="error"
+                    *ngIf="productFormControls['gender']?.touched && productFormControls['gender']?.invalid">
+                    <span *ngIf="productFormControls['gender']?.errors['required']">
+                        Please select 1 option
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col">Category</label>
+                <select class="custom-select" formControlName="category" (change)="onCategorySelect($event)">
+                    <option value="" hidden selected>Select category</option>
+                    <option *ngFor="let c of categoryList" [value]="c.value">{{ c.name }}</option>
+                </select>
+                <div class="error"
+                    *ngIf="productFormControls['category']?.touched && productFormControls['category']?.invalid">
+                    <span *ngIf="productFormControls['category']?.errors['required']">
+                        Please select 1 option
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col">Sub-Category</label>
+                <select class="custom-select" formControlName="subCategory">
+                    <option value="" hidden selected>Select subCategory</option>
+                    <option *ngIf="subCategoryList.length < 1">No option available</option>
+                    <option *ngFor="let s of subCategoryList" [value]="s.value">{{ s.name }}</option>
+                </select>
+                <ng-template class="error"
+                    *ngIf="productFormControls['subCategory']?.touched && productFormControls['subCategory']?.invalid">
+                    <span *ngIf="productFormControls['subCategory']?.errors['required']">
+                        Please select 1 option
+                    </span>
+                </ng-template>
+            </div>
+
+            <div class="row">
+                <label class="col">Images</label>
+                <div class="sub-row">
+                    <input type="text" [(ngModel)]="filesCount" class="custom-input" >
+                    <label class="choose" (click)="imageSelecor.click()">Choose</label>
+                    <input type="file" multiple #imageSelecor style="display: none;" (change)="onImageSelect($event)">
+                    
+                    <!-- <div class="error"
+                        *ngIf="productFormControls['name']?.touched && productFormControls['name']?.invalid">
+                        <span *ngIf="productFormControls['name']?.errors['required']">
+                            Name is required.
+                        </span>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="btn-row">
+                <button class="btn submit-btn" type="submit">Submit</button>
+                <button class="btn cancel-btn" type="submit">Cancel</button>
+            </div>
+
+        </div>
+    </form>
+</div>

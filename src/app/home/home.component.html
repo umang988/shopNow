@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="shopFor">
+        <div class="title">
+            <label>Shop For</label>
+        </div>
+        <div class="gender-grid">
+            <div class="card" *ngFor="let g of shopFor" (click)="onTypeSelect(g.value)" [routerLink]="['../product/shop',g.value]">
+                <div class="card-text">
+                    {{ g.name }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

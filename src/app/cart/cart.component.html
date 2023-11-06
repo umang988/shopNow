@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="cart-container" *ngIf="cartDetails.items.length > 0; else noItem">
+        <div class="userDetails" *ngIf="userDetails">
+            <div class="name">
+                <label>Deliver to: </label><label>{{ userDetails.firstname | titlecase }} {{ userDetails.lastname | titlecase }}</label>
+            </div>
+            <div class="address" *ngIf="userDetails.address">
+                <label>{{ userDetails.address }}</label>
+            </div>
+        </div>
+        <div class="priceDetails">
+            <div class="row">
+                <label>Price Details ( <span>{{ cartDetails?.items?.length }} {{ cartDetails?.items?.length > 1 ? 'items' : 'item' }}</span> )</label>
+            </div>
+            <div class="row">
+                <div class="col">Total MRP</div>
+                <div class="price-number">{{ cartDetails?.amount | currency:'INR' }}</div>
+            </div>
+            <div class="row">
+                <div class="col">Convenience Fee</div>
+                <div class="price-number">{{ cartDetails?.convenienceFee | currency:'INR' }}</div>
+            </div>
+            <div class="row line">
+                <div class="col">Delivery Fee</div>
+                <div class="price-number">{{ cartDetails?.deliveryFee | currency:'INR' }}</div>
+            </div>
+            <div class="row">
+                <div class="col">Total Amount</div>
+                <div class="price-number">{{ cartDetails?.totalAmount | currency:'INR' }}</div>
+            </div>
+            <div class="row">
+                <button class="btn">Place Order</button>
+            </div>
+        </div>
+        <div class="items-details" *ngIf="cartDetails">
+            <div class="item" *ngFor="let item of cartDetails.items">
+                <img class="item-image" [src]="item.product.image[0]" />
+                <div class="item-name">
+                    <label class="name">{{ item.product.name }}</label>
+                    <div class="quantity">
+                        <label>Quantity: </label>
+                        <div class="count-btns">
+                            <button [disabled]="item.quantity < 2" (click)="decreaseQuantity(item._id)"><i class="fa-solid fa-minus"></i></button><input [(ngModel)]="item.quantity" class="count" type="number" /><button (click)="increaseQuantity(item._id)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <label>{{ item.product.price * item.quantity | currency:'INR' }}</label>
+                    </div>
+                    <div class="remove">
+                        <button (click)="removeItem(item._id)">Remove Item</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <ng-template #noItem>
+        No Item in Cart
+    </ng-template>
+</div>

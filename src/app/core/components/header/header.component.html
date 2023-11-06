@@ -1,0 +1,24 @@
+<header>
+    <div class="left">
+        <label class="logo">Shop Now</label>
+        <div class="menu">
+            <a class="menuItem" (click)="onTypeChange('men')" [routerLink]="['product', 'shop', 'men']" routerLinkActive="active">Men</a>
+            <a class="menuItem" (click)="onTypeChange('women')" [routerLink]="['product','shop', 'women']" routerLinkActive="active">Women</a>
+            <a class="menuItem" (click)="onTypeChange('kids')" [routerLink]="['product','shop', 'kids']" routerLinkActive="active">Kids</a>
+        </div>
+    </div>
+    <div class="right">
+        <div class="cart-icon" [routerLink]="['cart']" *ngIf="user.roleId != 2">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <label *ngIf="cartDetails?.items.length > 0" class="count">{{ cartDetails.items.length }}</label>
+        </div>
+        <div class="profile-icon">
+            <i class="fa-solid fa-user" (click)="toggleProfileMenu()"></i>
+            <div class="subMenu" [ngClass]="showProfileMenu ? 'show' : 'hide'">
+                <a class="sub-links">Profile</a>
+                <a class="sub-links" (click)="onLogout()">Logout</a>
+            </div>
+        </div>
+        
+    </div>
+</header>

@@ -1,0 +1,69 @@
+<div class="container">
+    <form class="form" [formGroup]="signupForm" (ngSubmit)="onSignup()">
+        <div class="row">
+            <label class="title">Create New Account</label>
+        </div>
+        <div class="form-body">
+            <div class="row">
+                <label class="col">Firstname</label>
+                <input type="text" class="custom-input" formControlName="firstname">
+                <div class="error" *ngIf="signupFormControls['firstname']?.touched && signupFormControls['firstname']?.invalid">
+                    <span *ngIf="signupFormControls['firstname']?.errors['required']">
+                        First name is required.
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col">Lastname</label>
+                <input type="text" class="custom-input" formControlName="lastname">
+                <div class="error" *ngIf="signupFormControls['lastname']?.touched && signupFormControls['lastname']?.invalid">
+                    <span *ngIf="signupFormControls['lastname']?.errors['required']">
+                        Last name is required.
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col">Email</label>
+                <input type="email" class="custom-input" formControlName="email">
+                <div class="error" *ngIf="signupFormControls['email']?.touched && signupFormControls['email']?.invalid">
+                    <span *ngIf="signupFormControls['email']?.errors['required']">
+                        Email is required.
+                    </span>
+                </div>
+            </div>
+    
+            <div class="row">
+                <label class="col">Password</label>
+                <input [type]="showPassword ? 'text' : 'password'" class="custom-input" formControlName="password">
+                <i class="fa-solid" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisiblity()"></i>
+                <div class="error" *ngIf="signupFormControls['password']?.touched && signupFormControls['password']?.invalid">
+                    <span *ngIf="signupFormControls['password']?.errors['required']">
+                        Password is required.
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col">Confirm Password</label>
+                <input [type]="showConfirmPassword ? 'text' : 'password'" class="custom-input" formControlName="confirmPassword">
+                <i class="fa-solid" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="toggleConfirmPasswordVisiblity()"></i>
+                <div class="error" *ngIf="signupFormControls['confirmPassword']?.touched && signupFormControls['confirmPassword']?.invalid">
+                    <span *ngIf="signupFormControls['confirmPassword']?.errors['required']">
+                        Confirm Password is required.
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col"></label>
+                <button class="btn login-btn" type="submit">Sign Up</button>
+            </div>
+
+            <div class="row">
+                <p>Already have an account ? </p><a [routerLink]="['/login']">Login here</a>
+            </div>
+        </div>   
+    </form>
+</div>

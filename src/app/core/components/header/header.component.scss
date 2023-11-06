@@ -1,0 +1,122 @@
+header {
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 100px;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+
+.left {
+    display: flex;
+    gap: 250px;
+    align-items: center;
+    color: #ff8d18;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.menuItem {
+    color: #808080;
+}
+
+.active {
+    color: #ff8d18;
+}
+
+.signin {
+    background-color: #BCA37F;
+    color: #113946;
+    padding: 8px 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 16px;
+    border-radius: 3px;
+    transition: all .3s ease;
+}
+
+.signin:hover {
+    background-color: #FFF2D8;
+    transform: scale(1.1);
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .cart-icon{
+        position: relative;
+
+        .count{
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background-color: #ff8d18;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #fff;
+        }
+    }
+
+    .profile-icon{
+        position: relative;
+
+        .fa-user {
+            background-color: #fff;
+            
+        }
+    
+        .subMenu {
+            position: absolute;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            left: -20px;
+            box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+    
+            .sub-links {
+                font-size: 16px;
+                border-bottom: 1px solid gray;
+                cursor: pointer;
+            }
+        }
+    
+        .show {
+            display: flex;
+        }
+    
+        .hide {
+            display: none;
+        }
+    } 
+}
+
+.fa-solid{
+    font-size: 24px;
+    border-radius: 50%;
+    height: 48px;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

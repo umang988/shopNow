@@ -1,0 +1,72 @@
+.container{
+    display: flex;
+    gap: 30px;
+    padding: 50px 20px;
+}
+
+.images{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 50%;
+}
+
+.image-container{
+    height: 400px;
+}
+
+.details{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    .name{
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .price{
+        font-size: 32px;
+    }
+
+    .btn{
+        border: 1px solid #808080;
+        font-size: 18px;
+        padding: 10px 50px;
+    }
+
+    .description{
+        font-size: 18px;
+
+        label{
+            font-weight: 600;
+        }
+    }
+}
+
+.goToCart{
+    display: flex;
+    gap: 45px;
+    align-items: center;
+
+    .btn{
+        height: 45px;
+    }
+}
+
+.count-btns{
+    height: 45px;
+    display: flex;
+    align-items: center;
+
+    button{
+        height: 100%;
+        width: 50px;
+        cursor: pointer;
+    }
+}
+.count{
+    width: 50px;
+    text-align: center;
+}

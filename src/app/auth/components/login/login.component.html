@@ -1,0 +1,28 @@
+<div class="container">
+    <form class="form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="row">
+            <label class="title">Welcome</label>
+        </div>
+        <div class="form-body">
+            <div class="row">
+                <label class="col">Email</label>
+                <input type="email" class="custom-input" formControlName="email">
+            </div>
+    
+            <div class="row">
+                <label class="col">Password</label>
+                <input [type]="showPassword ? 'text' : 'password'" class="custom-input" formControlName="password">
+                <i class="fa-solid" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisiblity()"></i>
+            </div>
+
+            <div class="row">
+                <label class="col"></label>
+                <button class="btn login-btn" type="submit">Log In</button>
+            </div>
+
+            <div class="row">
+                <p>Don't have an account ? </p><a [routerLink]="['/signup']">Create new Account here</a>
+            </div>
+        </div>   
+    </form>
+</div>

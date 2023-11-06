@@ -1,0 +1,41 @@
+<div class="container" *ngIf="productDetails; else NoDetail">
+    <div class="images">
+        <div class="image-container" *ngFor="let i of productDetails.image"
+            [style.background]="'url(' + i + ') no-repeat center center / cover'">
+        </div>
+    </div>
+    <div class="details">
+        <div class="name">
+            <label>{{ productDetails.name }}</label>
+        </div>
+        <div class="price">
+            <label>{{ productDetails.price | currency:'INR' }}</label>
+        </div>
+        <ng-container *ngIf="productIndex > -1; else addToCart">
+            <div class="goToCart">
+                <div class="count-btns" *ngIf="cartDetails?.items[productIndex]?.quantity > -1">
+                    <button [disabled]="cartDetails?.items[productIndex]?.quantity < 2"
+                        (click)="decreaseQuantity(productDetails._id)"><i class="fa-solid fa-minus"></i></button>
+                    <input [(ngModel)]="cartDetails?.items[productIndex].quantity" class="count" type="number" />
+                    <button (click)="increaseQuantity(productDetails._id)"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <div class="goToCart">
+                    <button (click)="goToCart()" class="btn">Go to Cart</button>
+                </div>
+            </div>
+
+        </ng-container>
+        <ng-template #addToCart>
+            <div class="add">
+                <button class="btn" (click)="addItemToCart(productDetails._id)">Add to Cart</button>
+            </div>
+        </ng-template>
+        <div class="description">
+            <label>Product Details</label>
+            <p>{{ productDetails.description }}</p>
+        </div>
+    </div>
+</div>
+<ng-template #NoDetail>
+    <h1>Product not available</h1>
+</ng-template>
