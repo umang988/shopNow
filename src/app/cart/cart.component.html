@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="cart-container" *ngIf="cartDetails.items.length > 0; else noItem">
+    <div class="cart-container" *ngIf="cartDetails; else noItem">
         <div class="userDetails" *ngIf="userDetails">
             <div class="name">
                 <label>Deliver to: </label><label>{{ userDetails.firstname | titlecase }} {{ userDetails.lastname | titlecase }}</label>

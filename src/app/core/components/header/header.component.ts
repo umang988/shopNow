@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
     this.cartService.getCartByUser(this.userId).subscribe((res : any) => {
       console.log(res);
       this.cartDetails = res.result;
+      console.log(this.cartDetails.items.length)
       localStorage.setItem('cart', JSON.stringify(this.cartDetails));
     })
   }

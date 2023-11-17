@@ -2,20 +2,35 @@
     <div class="title">
         <label>{{ gender | titlecase }} Collection</label>
     </div>
-    <div class="product" *ngIf="productList?.length > 0;else noProduct">
+    <ng-container *ngIf="productLoading; else products">
         <div class="product-grid">
-            <div *ngFor="let p of productList" class="product-card" [routerLink]="['../../details',p._id]">
-                <div class="image-container" [style.background]="'url(' + p.image[0] + ') no-repeat center center / cover'"></div>
+            <div *ngFor="let _ of skeletonArr" class="product-card">
+                <div class="image-container i-skeleton"></div>
                 <div class="details">
-                    <label class="name">{{ p.name }}</label>
-                    <label class="price">{{ p.price | currency:'INR' }}</label>
+                    <label class="name t-skeleton"></label>
+                    <label class="price p-skeleton"></label>
                 </div>
             </div>
         </div>
-    </div>
-    <ng-template #noProduct>
-        <div class="noProductLabel">
-            No Product available
+    </ng-container>
+    <ng-template #products>
+        <div class="product" *ngIf="productList?.length > 0;else noProduct">
+            <div class="product-grid">
+                <div *ngFor="let p of productList" class="product-card" [routerLink]="['../../details',p._id]">
+                    <div class="image-container"
+                        [style.background]="'url(' + p.image[0] + ') no-repeat center center / cover'"></div>
+                    <div class="details">
+                        <label class="name">{{ p.name }}</label>
+                        <label class="price">{{ p.price | currency:'INR' }}</label>
+                    </div>
+                </div>
+            </div>
         </div>
-    </ng-template>
+    
+        <ng-template #noProduct>
+            <div class="noProductLabel">
+                No Product available
+            </div>
+        </ng-template>
+    </ng-template> 
 </div>

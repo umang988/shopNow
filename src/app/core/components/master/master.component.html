@@ -1,3 +1,7 @@
+<div class="loader" *ngIf="showLoader;">
+    <app-loader></app-loader>
+</div>
+
 <app-header *ngIf="isAuth"></app-header>
 <!-- <app-sidebar></app-sidebar> -->
 <router-outlet></router-outlet>

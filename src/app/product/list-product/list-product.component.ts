@@ -10,27 +10,37 @@ import { UtilService } from 'src/app/core/util/util.service';
 })
 export class ListProductComponent implements OnInit {
 
-  public productList : any;
-  public gender : string;
+  public productList: any;
+  public gender: string;
+
+  public skeletonArr: any = Array.from({ length: 10 });
+  public productLoading: boolean = false;
 
   constructor(private productService: ProductService,
-    private activatedRoute : ActivatedRoute,
-    private utilService : UtilService
+    private activatedRoute: ActivatedRoute,
+    private utilService: UtilService
   ) { }
 
   ngOnInit(): void {
     this.utilService.selectedForType.subscribe(res => {
       this.gender = res;
-      if(this.gender){
+      console.log(this.gender)
+      if (this.gender) {
+        this.getProductList();
+      } else {
+        this.gender = this.activatedRoute.snapshot.paramMap.get('gender');
         this.getProductList();
       }
-    })    
+    })
   }
 
-  public getProductList(){
-    this.productService.getAllProducts(this.gender).subscribe((res : any) => {
+  public getProductList() {
+    this.productLoading = true;
+    this.productService.getAllProducts(this.gender).subscribe((res: any) => {
+      this.productLoading = false;
       this.productList = res.result;
     }, (err) => {
+      this.productLoading = false;
       this.productList = [];
     })
   }

@@ -26,7 +26,12 @@
     cursor: pointer;
 
     .image-container{
-        height: 300px;
+       height: 300px;
+    }
+
+    .i-skeleton{
+        background-color: #d3d3d3;
+        animation: image-load 2s infinite;
     }
 
     .details {
@@ -41,9 +46,33 @@
             text-overflow: ellipsis;
             width: 200px
         }
+
+        .t-skeleton{
+            animation: image-load 2s infinite;
+            height: 20px;
+            width: 200px;
+        }
+
+        .p-skeleton{
+            animation: image-load 2s infinite;
+            width: 100px;
+            height: 20px;
+        }
     }
 }
 
 .product-card:hover{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+@keyframes image-load {
+    0% {
+        background-color: #d3d3d3;
+    }
+    50% {
+        background-color: #f2f2f2;
+    }
+    100% {
+        background-color: #d3d3d3;
+    }
 }

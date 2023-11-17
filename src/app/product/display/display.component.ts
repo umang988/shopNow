@@ -12,24 +12,24 @@ import { Subscription } from 'rxjs';
 })
 export class DisplayComponent implements OnInit, OnDestroy {
 
-  public productDetails : any;
-  public productId : string = null;
-  public cartDetails : any;
-  public userId : string;
-  public productIndex : number;
-  public subscriptions : Subscription[] = [];
+  public productDetails: any;
+  public productId: string = null;
+  public cartDetails: any;
+  public userId: string;
+  public productIndex: number;
+  public subscriptions: Subscription[] = [];
 
-  constructor(private productService : ProductService, 
-      private activatedRoute : ActivatedRoute,
-      private cartService : CartService,
-      private toastr : ToastrService,
-      private router : Router
-    ) {}
+  constructor(private productService: ProductService,
+    private activatedRoute: ActivatedRoute,
+    private cartService: CartService,
+    private toastr: ToastrService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId');
     this.productId = this.activatedRoute.snapshot.paramMap.get('productId');
-    if(this.productId){
+    if (this.productId) {
       this.getProductDetails();
     }
     this.getCartDetails();
@@ -41,17 +41,17 @@ export class DisplayComponent implements OnInit, OnDestroy {
     })
   }
 
-  getProductDetails(){
-    let productSubscription = this.productService.getProductDetails(this.productId).subscribe((res : any) => {
+  getProductDetails() {
+    let productSubscription = this.productService.getProductDetails(this.productId).subscribe((res: any) => {
       this.productDetails = res.result;
     })
     this.subscriptions.push(productSubscription);
   }
 
-  getCartDetails(){
-    let cartSubscription = this.cartService.getCartByUser(this.userId).subscribe((res : any) => {
+  getCartDetails() {
+    let cartSubscription = this.cartService.getCartByUser(this.userId).subscribe((res: any) => {
       this.cartDetails = res.result;
-        this.productIndex = this.findItem(this.productDetails?._id);
+      this.productIndex = this.findItem(this.productDetails?._id);
     })
     this.subscriptions.push(cartSubscription);
   }
@@ -63,35 +63,37 @@ export class DisplayComponent implements OnInit, OnDestroy {
     }
   }
 
-  decreaseQuantity(productId){
+  decreaseQuantity(productId) {
     let itemIndex = this.findItem(productId)
     if (itemIndex > -1) {
       this.cartDetails.items[itemIndex].quantity -= 1;
     }
   }
 
-  findItem(productId){
+  findItem(productId) {
     return this.cartDetails?.items?.findIndex((ele) => {
       return ele.product._id == productId;
     })
   }
 
-  goToCart(){
+  goToCart() {
     this.router.navigate(['cart'])
   }
 
-  addItemToCart(productId : string){
+  addItemToCart(productId: string) {
     let data = {
-      productId : productId,
-      userId : this.userId
+      productId: productId,
+      userId: this.userId
     }
-    if(this.cartDetails?.items){
+    if (this.cartDetails?.items?.length > 0) {
       let cartId = this.cartDetails._id;
-      this.cartService.addNewItem(cartId, data).subscribe((res : any) => {
+      this.cartService.addNewItem(cartId, data).subscribe((res: any) => {
         this.toastr.success(res.message, "SUCCESS");
       })
     } else {
-      this.cartService.initializeCart(data).subscribe((res : any ) => {
+      this.cartService.initializeCart(data).subscribe((res: any) => {
+        this.cartDetails = res.result;
+        this.productIndex = this.findItem(this.productDetails?._id);
         this.toastr.success(res.message, "SUCCESS");
       })
     }
