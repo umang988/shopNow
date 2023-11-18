@@ -21,7 +21,9 @@ export class UtilService {
 
     let gender = this.activatedRoute.snapshot.paramMap.get('gender');
     this.selectedForType = new BehaviorSubject(gender);
-    this.getCartDetails();
+    if(this.userId){
+      this.getCartDetails();
+    }
   }
 
   getCartDetails() {

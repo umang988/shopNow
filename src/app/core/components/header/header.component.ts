@@ -21,11 +21,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId');
     this.user = JSON.parse(localStorage.getItem('user'));
-
     this.utilService.cartItemCount.subscribe((count) => {
       this.count = count;
     })
-
   }
 
   onTypeChange(type) {
