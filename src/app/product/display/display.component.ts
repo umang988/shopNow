@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/cart/services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { UtilService } from 'src/app/core/util/util.service';
 
 @Component({
   selector: 'app-display',
@@ -22,6 +23,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
   constructor(private productService: ProductService,
     private activatedRoute: ActivatedRoute,
     private cartService: CartService,
+    private utilService : UtilService,
     private toastr: ToastrService,
     private router: Router
   ) { }
@@ -60,6 +62,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
     let itemIndex = this.findItem(productId)
     if (itemIndex > -1) {
       this.cartDetails.items[itemIndex].quantity += 1;
+      this.updateCart();
     }
   }
 
@@ -67,6 +70,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
     let itemIndex = this.findItem(productId)
     if (itemIndex > -1) {
       this.cartDetails.items[itemIndex].quantity -= 1;
+      this.updateCart();
     }
   }
 
@@ -88,15 +92,27 @@ export class DisplayComponent implements OnInit, OnDestroy {
     if (this.cartDetails?.items?.length > 0) {
       let cartId = this.cartDetails._id;
       this.cartService.addNewItem(cartId, data).subscribe((res: any) => {
-        this.toastr.success(res.message, "SUCCESS");
+        this.cartDetails = res.result;
+        this.updateDetails(res.message);
       })
     } else {
       this.cartService.initializeCart(data).subscribe((res: any) => {
         this.cartDetails = res.result;
-        this.productIndex = this.findItem(this.productDetails?._id);
-        this.toastr.success(res.message, "SUCCESS");
+        this.updateDetails(res.message);
       })
     }
+  }
+
+  updateDetails(msg : string){
     this.productIndex = this.findItem(this.productDetails?._id);
+    this.utilService.cartItemCount.next(this.cartDetails.items.length);
+    this.toastr.success(msg, "SUCCESS");
+  }
+
+  updateCart(){
+    this.cartService.updateCart(this.cartDetails._id, { items : this.cartDetails.items }).subscribe((res : any) => {
+      this.toastr.success(res.message, "SUCCESS");
+      this.getCartDetails();
+    })
   }
 }

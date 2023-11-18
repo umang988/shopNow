@@ -9,39 +9,34 @@ import { UtilService } from '../../util/util.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  
-  public showProfileMenu : boolean = false;
-  public userId : string = null;
-  public user : any;
-  public cartDetails: any;
 
-  constructor(private authService : AuthService, private cartService : CartService, private utilService : UtilService) {}
+  public showProfileMenu: boolean = false;
+  public userId: string = null;
+  public user: any;
+  public cartDetails: any;
+  public count: number;
+
+  constructor(private authService: AuthService, private cartService: CartService, private utilService: UtilService) { }
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId');
     this.user = JSON.parse(localStorage.getItem('user'));
-    console.log(this.user)
-    this.getCartDetails();
-  }
 
-  getCartDetails(){
-    this.cartService.getCartByUser(this.userId).subscribe((res : any) => {
-      console.log(res);
-      this.cartDetails = res.result;
-      console.log(this.cartDetails.items.length)
-      localStorage.setItem('cart', JSON.stringify(this.cartDetails));
+    this.utilService.cartItemCount.subscribe((count) => {
+      this.count = count;
     })
+
   }
 
-  onTypeChange(type){
+  onTypeChange(type) {
     this.utilService.selectedForType.next(type);
   }
 
-  toggleProfileMenu(){
+  toggleProfileMenu() {
     this.showProfileMenu = !this.showProfileMenu;
   }
 
-  onLogout(){
+  onLogout() {
     this.authService.logout();
   }
 }

@@ -24,7 +24,6 @@ export class ListProductComponent implements OnInit {
   ngOnInit(): void {
     this.utilService.selectedForType.subscribe(res => {
       this.gender = res;
-      console.log(this.gender)
       if (this.gender) {
         this.getProductList();
       } else {

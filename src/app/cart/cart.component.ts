@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from './services/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { UtilService } from '../core/util/util.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,6 +14,7 @@ export class CartComponent implements OnInit {
   public userDetails: any;
 
   constructor(private cartService: CartService,
+    private utilService : UtilService,
     private toastr : ToastrService ) { }
 
   ngOnInit(): void {
@@ -23,6 +25,7 @@ export class CartComponent implements OnInit {
   getCartData() {
     this.cartService.getCartByUser(this.userDetails._id).subscribe((res: any) => {
       this.cartDetails = res.result;
+      this.utilService.cartItemCount.next(this.cartDetails?.items?.length || 0);
     })
   }
 
@@ -58,7 +61,6 @@ export class CartComponent implements OnInit {
   }
 
   updateCart(){
-    console.log(this.cartDetails._id, this.cartDetails.items)
     this.cartService.updateCart(this.cartDetails._id, { items : this.cartDetails.items }).subscribe((res : any) => {
       this.toastr.success(res.message, "SUCCESS");
       this.getCartData();

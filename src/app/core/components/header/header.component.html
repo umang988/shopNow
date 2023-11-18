@@ -10,7 +10,7 @@
     <div class="right">
         <div class="cart-icon" [routerLink]="['cart']" *ngIf="user.roleId != 2">
             <i class="fa-solid fa-cart-shopping"></i>
-            <label *ngIf="cartDetails?.items.length > 0" class="count">{{ cartDetails.items.length }}</label>
+            <label *ngIf="count > 0" class="count">{{ count }}</label>
         </div>
         <div class="profile-icon">
             <i class="fa-solid fa-user" (click)="toggleProfileMenu()"></i>
