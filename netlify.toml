@@ -1,6 +1,6 @@
 [build]
   publish = "dist/e-commerce"
-  command = "npm run build"
+  command = "ng build --configuration=development"
 
 [[redirects]]
   from = "/*"
