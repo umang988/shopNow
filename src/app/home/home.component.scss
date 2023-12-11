@@ -11,11 +11,11 @@
 .gender-grid{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
 }
 
 .card{
     height: 200px;
-    width: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,4 +32,55 @@
 
 .card:hover{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (max-width: 1200px) {
+    
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+    
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
+    .container{
+        padding: 50px 50px;
+    }
+
+    .title{
+        font-size: 28px;
+    }
+
+    .card{
+        .card-text{
+            font-size: 20px;
+        }
+    }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 480px) {
+    .gender-grid{
+        grid-template-columns: repeat(1 , 1fr);
+    }
+
+    .card{
+        .card-text{
+            font-size: 24px;
+        }
+    }
+}
+
+@media only screen and (max-width: 281px) {
+    .card{
+        height: 150px;
+    }
 }
