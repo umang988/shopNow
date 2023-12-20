@@ -145,8 +145,15 @@
 
     .product-card{
         .details{
-            .name{
-                max-width: 120px;
+            .name {
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                height: 40px;
+                width: 150px;
             }
         }
     }
