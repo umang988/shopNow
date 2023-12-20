@@ -131,6 +131,9 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 480px) {
+    .product-grid{
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
     .container{
         width: 100%;
         padding: 20px 0px;
@@ -142,5 +145,7 @@
 }
 
 @media only screen and (max-width: 280px) {
-    
+    .product-grid{
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
 }
